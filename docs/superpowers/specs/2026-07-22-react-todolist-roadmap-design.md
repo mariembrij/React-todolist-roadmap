@@ -95,6 +95,14 @@ React-todolist-roadmap/
 Practice warm-up files live only on the two hook-heavy days (3 & 4), exactly
 mirroring how the HTML course placed `practice.js` on its JS-heavy days (3 & 4).
 
+**How practice files are run (React-specific):** unlike the vanilla
+`practice.js` (run with `node`), React `useState`/`useEffect` exercises need the
+browser. Each `practice.jsx` is a self-contained set of tiny component stubs
+with TODOs. The challenge instructs the intern to **copy it into
+`project/src/`**, temporarily render `<Practice />` from `main.jsx` to try her
+answers live in the dev server, then switch back to `<App />`. This doubles as
+teaching the real React feedback loop (edit → see it instantly in the browser).
+
 ## 4. Final feature set
 
 The reference app — and what the intern ends the week with — supports:
