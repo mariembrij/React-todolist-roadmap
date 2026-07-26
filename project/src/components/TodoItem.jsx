@@ -1,14 +1,16 @@
-function TodoItem({ todo }) {
+function TodoItem({ todo, onToggle }) {
     return (
         <li className={todo.completed ? 'todo-item completed' : 'todo-item'}>
             <button
+                type="button"
                 className={todo.completed ? 'todo-check checked' : 'todo-check'}
-                aria-label="Mark complete"
+                onClick={() => onToggle(todo.id)}
+                aria-label={todo.completed ? 'Mark incomplete' : 'Mark complete'}
             >
                 {todo.completed ? '✓' : ''}
             </button>
             <span className="todo-text">{todo.text}</span>
-            <button className="todo-delete" aria-label="Delete task">
+            <button type="button" className="todo-delete" aria-label="Delete task">
                 ✕
             </button>
         </li>

@@ -12,6 +12,20 @@ function App() {
   ]
   const [todos, setTodos] = useState([])//day3//
 
+
+  function addTodo(text) {
+    const trimmed = text.trim()
+    if (trimmed === '') return;
+
+    const newTodo = { id: Date.now().toString(), text: trimmed, completed: false }
+    setTodos((prev) => [...prev, newTodo])
+  }
+  function toggleTodo(id) {
+    setTodos((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+    )
+  }
+
   return (
     <main className="app-card">
       <Header />
@@ -19,6 +33,8 @@ function App() {
       <SearchBar />
       <FilterTabs />
       <TodoList />
+      <TodoForm onAdd={addTodo} />
+      <TodoList todos={todos} onToggle={toggleTodo} />
       <TodoList todos={todos} />
       <Footer />
     </main>
