@@ -1,4 +1,4 @@
-function TodoItem({ todo, onToggle }) {
+function TodoItem({ todo, onToggle, onDelete }) {
     return (
         <li className={todo.completed ? 'todo-item completed' : 'todo-item'}>
             <button
@@ -10,7 +10,7 @@ function TodoItem({ todo, onToggle }) {
                 {todo.completed ? '✓' : ''}
             </button>
             <span className="todo-text">{todo.text}</span>
-            <button type="button" className="todo-delete" aria-label="Delete task">
+            <button type="button" className="todo-delete" onClick={() => onDelete(todo.id)} aria-label="Delete task">
                 ✕
             </button>
         </li>

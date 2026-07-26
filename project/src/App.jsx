@@ -26,6 +26,10 @@ function App() {
     )
   }
 
+  function deleteTodo(id) {
+    setTodos((prev) => prev.filter((t) => t.id !== id))
+  }
+
   return (
     <main className="app-card">
       <Header />
@@ -33,6 +37,7 @@ function App() {
       <SearchBar />
       <FilterTabs />
       <TodoList />
+      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
       <TodoForm onAdd={addTodo} />
       <TodoList todos={todos} onToggle={toggleTodo} />
       <TodoList todos={todos} />
