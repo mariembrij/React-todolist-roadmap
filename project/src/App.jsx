@@ -4,12 +4,13 @@ import SearchBar from './components/SearchBar.jsx'
 import FilterTabs from './components/FilterTabs.jsx'
 import TodoList from './components/TodoList.jsx'
 import Footer from './components/Footer.jsx'
-
+import { useState } from 'react'//day 3//
 function App() {
   const todos = [
     { id: '1', text: 'learn html', completed: false },
-    { id: '2', text: 'Read the React lesson', completed: true },
+    { id: '2', text: 'Read the React lesson', completed: true },//day2//
   ]
+  const [todos, setTodos] = useState([])//day3//
 
   return (
     <main className="app-card">
