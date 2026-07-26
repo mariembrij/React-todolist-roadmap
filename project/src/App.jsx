@@ -1,11 +1,25 @@
+import Header from './components/Header.jsx'
+import TodoForm from './components/TodoForm.jsx'
+import SearchBar from './components/SearchBar.jsx'
+import FilterTabs from './components/FilterTabs.jsx'
+import TodoList from './components/TodoList.jsx'
+import Footer from './components/Footer.jsx'
+
 function App() {
+  const todos = [
+    { id: '1', text: 'learn html', completed: false },
+    { id: '2', text: 'Read the React lesson', completed: true },
+  ]
+
   return (
-    <main>
-      <h1>My Tasks</h1>
-      <p>
-        👋 Start here — open <code>day-1-react-jsx/CHALLENGE.md</code> and build
-        the app right here in the <code>src/</code> folder.
-      </p>
+    <main className="app-card">
+      <Header />
+      <TodoForm />
+      <SearchBar />
+      <FilterTabs />
+      <TodoList />
+      <TodoList todos={todos} />
+      <Footer />
     </main>
   )
 }

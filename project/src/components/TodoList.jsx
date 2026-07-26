@@ -1,21 +1,15 @@
-function TodoList() {
+import TodoItem from './TodoItem.jsx'
+
+function TodoList({ todos }) {
+    if (todos.length === 0) {
+        return <p className="empty-state">No tasks yet. Add your first one above!</p>
+    }
+
     return (
         <ul className="todo-list">
-            <li className="todo-item">
-                <button className="todo-check" aria-label="Mark complete"></button>
-                <span className="todo-text">Buy milk</span>
-                <button className="todo-delete" aria-label="Delete task">✕</button>
-            </li>
-            <li className="todo-item completed">
-                <button className="todo-check checked" aria-label="Mark complete">✓</button>
-                <span className="todo-text">Read the React lesson</span>
-                <button className="todo-delete" aria-label="Delete task">✕</button>
-            </li>
-            <li className="todo-item">
-                <button className="todo-check" aria-label="Mark complete"></button>
-                <span className="todo-text">Water the plants</span>
-                <button className="todo-delete" aria-label="Delete task">✕</button>
-            </li>
+            {todos.map((todo) => (
+                <TodoItem key={todo.id} todo={todo} />
+            ))}
         </ul>
     )
 }
