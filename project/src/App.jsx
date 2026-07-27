@@ -6,11 +6,10 @@ import TodoList from './components/TodoList.jsx'
 import Footer from './components/Footer.jsx'
 import { useState } from 'react'//day 3//
 function App() {
-  const todos = [
-    { id: '1', text: 'learn html', completed: false },
-    { id: '2', text: 'Read the React lesson', completed: true },//day2//
-  ]
-  const [todos, setTodos] = useState([])//day3//
+ 
+  
+  const [todos, setTodos] = useState([{ id: '1', text: 'learn html', completed: false },
+    { id: '2', text: 'Read the React lesson', completed: true }])//day3//
 
 
   function addTodo(text) {
@@ -33,14 +32,10 @@ function App() {
   return (
     <main className="app-card">
       <Header />
-      <TodoForm />
       <SearchBar />
       <FilterTabs />
-      <TodoList />
       <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
       <TodoForm onAdd={addTodo} />
-      <TodoList todos={todos} onToggle={toggleTodo} />
-      <TodoList todos={todos} />
       <Footer />
     </main>
   )
