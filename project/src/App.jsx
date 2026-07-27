@@ -4,13 +4,18 @@ import SearchBar from './components/SearchBar.jsx'
 import FilterTabs from './components/FilterTabs.jsx'
 import TodoList from './components/TodoList.jsx'
 import Footer from './components/Footer.jsx'
-import { useState } from 'react'//day 3//
+import { useState, useEffect } from 'react'//day 4//
 function App() {
-  const todos = [
-    { id: '1', text: 'learn html', completed: false },
-    { id: '2', text: 'Read the React lesson', completed: true },//day2//
-  ]
-  const [todos, setTodos] = useState([])//day3//
+
+  const [todos, setTodos] = useState(() => {
+    const stored = localStorage.getItem('todos')
+    return stored ? JSON.parse(stored) : []
+  })//day4//
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])//day 4//
+
 
 
   function addTodo(text) {
@@ -30,17 +35,19 @@ function App() {
     setTodos((prev) => prev.filter((t) => t.id !== id))
   }
 
+  function editTodo(id, newText) {
+    const trimmed = newText.trim()
+    if (trimmed === '') return
+    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, text: trimmed } : t)))
+  }//day 4//
+
   return (
     <main className="app-card">
       <Header />
-      <TodoForm />
       <SearchBar />
       <FilterTabs />
-      <TodoList />
-      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+      <TodoList todos={todos} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />
       <TodoForm onAdd={addTodo} />
-      <TodoList todos={todos} onToggle={toggleTodo} />
-      <TodoList todos={todos} />
       <Footer />
     </main>
   )

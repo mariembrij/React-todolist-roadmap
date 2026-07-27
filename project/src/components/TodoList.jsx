@@ -1,6 +1,6 @@
 import TodoItem from './TodoItem.jsx'
 
-function TodoList({ todos, onToggle }) {
+function TodoList({ todos, onToggle, onEdit, onDelete }) {
     if (todos.length === 0) {
         return <p className="empty-state">No tasks yet. Add your first one above!</p>
     }
@@ -8,7 +8,7 @@ function TodoList({ todos, onToggle }) {
     return (
         <ul className="todo-list">
             {todos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} onToggle={onToggle} onDelete={onDelete}
+                <TodoItem key={todo.id} todo={todo} onToggle={onToggle} onEdit={onEdit} onDelete={onDelete}
                 />
             ))}
         </ul>

@@ -1,4 +1,28 @@
-function TodoItem({ todo, onToggle, onDelete }) {
+import { useState, useRef } from 'react'
+
+function TodoItem({ todo, onToggle, onEdit, onDelete }) {
+    const [isEditing, setIsEditing] = useState(false)
+    const [draft, setDraft] = useState(todo.text)
+    const cancelRef = useRef(false) // so the blur after Escape knows not to save
+
+    function startEditing() {
+        setDraft(todo.text)
+        cancelRef.current = false
+        setIsEditing(true)
+    }
+    function finishEditing() {
+        if (cancelRef.current) {
+            cancelRef.current = false
+        } else {
+            onEdit(todo.id, draft)
+        }
+        setIsEditing(false)
+    }
+    function handleKeyDown(e) {
+        if (e.key === 'Enter') finishEditing()
+        else if (e.key === 'Escape') { cancelRef.current = true; setIsEditing(false) }
+    }
+
     return (
         <li className={todo.completed ? 'todo-item completed' : 'todo-item'}>
             <button
@@ -9,10 +33,20 @@ function TodoItem({ todo, onToggle, onDelete }) {
             >
                 {todo.completed ? '✓' : ''}
             </button>
-            <span className="todo-text">{todo.text}</span>
-            <button type="button" className="todo-delete" onClick={() => onDelete(todo.id)} aria-label="Delete task">
-                ✕
-            </button>
+            {isEditing ? (
+                <input
+                    type="text"
+                    className="todo-edit-input"
+                    value={draft}
+                    autoFocus
+                    onChange={(e) => setDraft(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    onBlur={finishEditing}
+                />
+            ) : (
+                <span className="todo-text" onDoubleClick={startEditing}>{todo.text}</span>
+            )}
+            <button type="button" className="todo-delete" onClick={() => onDelete(todo.id)} aria-label="Delete task">✕</button>
         </li>
     )
 }
