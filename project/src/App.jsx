@@ -10,16 +10,21 @@ function App() {
 
   const [todos, setTodos] = useLocalStorage('todos', [])
 
-
+  const [query, setQuery] = useState('')//day5//
   const [filter, setFilter] = useState('all')//day 4//
 
+
   const visibleTodos = useMemo(() => {
-    return todos.filter((t) => {
-      if (filter === 'active') return !t.completed
-      if (filter === 'completed') return t.completed
-      return true
-    })
-  }, [todos, filter])//day 4//
+    3.
+    const q = query.trim().toLowerCase()
+    return todos
+      .filter((t) => {
+        if (filter === 'active') return !t.completed
+        if (filter === 'completed') return t.completed
+        return true
+      })
+      .filter((t) => t.text.toLowerCase().includes(q))
+  }, [todos, filter, query])//day5//
 
   const itemsLeft = todos.filter((t) => !t.completed).length//day 4//
 
@@ -53,10 +58,11 @@ function App() {
   return (
     <main className="app-card">
       <Header />
-      <SearchBar />
+      <TodoForm onAdd={addTodo} />
+      <SearchBar query={query} onQueryChange={setQuery} />//day5//
       <FilterTabs filter={filter} onFilterChange={setFilter} />
       <TodoList todos={visibleTodos} isEmpty={todos.length === 0} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />
-      <TodoForm onAdd={addTodo} />
+
       <Footer />
     </main>
   )

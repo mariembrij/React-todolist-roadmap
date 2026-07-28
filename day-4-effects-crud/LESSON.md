@@ -6,6 +6,15 @@ hook. You already have tasks that live in state. The problem: close the
 tab and they vanish. Today we fix that for good — and finish every
 action a real todo app needs.
 
+
+
+
+
+
+
+
+
+
 ## 1. `useEffect` — run code after the screen updates
 
 Some work isn't about drawing the screen — it's about talking to the

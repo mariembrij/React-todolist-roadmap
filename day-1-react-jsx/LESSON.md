@@ -1,4 +1,4 @@
-# Day 1: React + Vite + JSX — Building the Skeleton
+ # Day 1: React + Vite + JSX — Building the Skeleton
 
 Today you meet React and build the skeleton of your app out of
 components — like yesterday's HTML skeleton, but assembled from reusable
