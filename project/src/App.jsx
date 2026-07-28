@@ -4,19 +4,24 @@ import SearchBar from './components/SearchBar.jsx'
 import FilterTabs from './components/FilterTabs.jsx'
 import TodoList from './components/TodoList.jsx'
 import Footer from './components/Footer.jsx'
-import { useState, useEffect } from 'react'//day 4//
+import { useState, useEffect, useMemo } from 'react'//day 4//
+import { useLocalStorage } from './hooks/useLocalStorage.js'
 function App() {
 
-  const [todos, setTodos] = useState(() => {
-    const stored = localStorage.getItem('todos')
-    return stored ? JSON.parse(stored) : []
-  })//day4//
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  }, [todos])//day 4//
+  const [todos, setTodos] = useLocalStorage('todos', [])
 
 
+  const [filter, setFilter] = useState('all')//day 4//
+
+  const visibleTodos = useMemo(() => {
+    return todos.filter((t) => {
+      if (filter === 'active') return !t.completed
+      if (filter === 'completed') return t.completed
+      return true
+    })
+  }, [todos, filter])//day 4//
+
+  const itemsLeft = todos.filter((t) => !t.completed).length//day 4//
 
   function addTodo(text) {
     const trimmed = text.trim()
@@ -41,12 +46,16 @@ function App() {
     setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, text: trimmed } : t)))
   }//day 4//
 
+  function clearCompleted() {
+    setTodos((prev) => prev.filter((t) => !t.completed))
+  }//day 4//
+
   return (
     <main className="app-card">
       <Header />
       <SearchBar />
-      <FilterTabs />
-      <TodoList todos={todos} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />
+      <FilterTabs filter={filter} onFilterChange={setFilter} />
+      <TodoList todos={visibleTodos} isEmpty={todos.length === 0} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />
       <TodoForm onAdd={addTodo} />
       <Footer />
     </main>

@@ -1,7 +1,7 @@
 import TodoItem from './TodoItem.jsx'
 
-function TodoList({ todos, onToggle, onEdit, onDelete }) {
-    if (todos.length === 0) {
+function TodoList({ todos, isEmpty, onToggle, onEdit, onDelete }) {
+    if (isEmpty) {
         return <p className="empty-state">No tasks yet. Add your first one above!</p>
     }
 
