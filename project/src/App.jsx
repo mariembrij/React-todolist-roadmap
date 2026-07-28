@@ -4,7 +4,7 @@ import SearchBar from './components/SearchBar.jsx'
 import FilterTabs from './components/FilterTabs.jsx'
 import TodoList from './components/TodoList.jsx'
 import Footer from './components/Footer.jsx'
-import { useState, useEffect, useMemo } from 'react'//day 4//
+import { useState, useMemo } from 'react'//day 4//
 import { useLocalStorage } from './hooks/useLocalStorage.js'
 function App() {
 
@@ -29,16 +29,16 @@ function App() {
 
     const newTodo = { id: Date.now().toString(), text: trimmed, completed: false }
     setTodos((prev) => [...prev, newTodo])
-  }
+  }//day 3//
   function toggleTodo(id) {
     setTodos((prev) =>
       prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
     )
-  }
+  }//day3//
 
   function deleteTodo(id) {
     setTodos((prev) => prev.filter((t) => t.id !== id))
-  }
+  }//day3//
 
   function editTodo(id, newText) {
     const trimmed = newText.trim()
