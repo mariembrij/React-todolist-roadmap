@@ -1,12 +1,46 @@
 # My Tasks — React Todo App
 
-_This is a placeholder. You'll replace it with your own README on Day 5._
+A clean and modern Todo application built with React and Vite. It allows users to manage daily tasks by adding, editing, completing, deleting, searching, and filtering todos. All data is stored in the browser using Local Storage, so tasks remain available after refreshing the page.
 
-## Run this project
+## Run the project
 
-```sh
+```bash
 npm install
 npm run dev
 ```
 
-Then open the `http://localhost:5173` link it prints.
+Open the URL shown in the terminal, usually:
+
+http://localhost:5173
+
+Stop the development server with:
+
+```bash
+Ctrl + C
+```
+
+## Features
+
+- Add new tasks
+- Edit existing tasks
+- Delete tasks
+- Mark tasks as completed
+- Filter tasks (All / Active / Completed)
+- Search tasks instantly
+- Clear all completed tasks
+- Dark mode with saved preference
+- Data persistence using Local Storage
+
+## Technologies
+
+- React
+- Vite
+- JavaScript (ES6)
+- CSS3
+- Local Storage
+
+## Screenshot
+
+Add a screenshot here if available.
+
+![screenshot](screenshot.png)
