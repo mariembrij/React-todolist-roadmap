@@ -12,7 +12,7 @@ function App() {
 
   const [query, setQuery] = useState('')//day5//
   const [filter, setFilter] = useState('all')//day 4//
-
+  const [theme, setTheme] = useLocalStorage('theme', 'light')//day5//
 
   const visibleTodos = useMemo(() => {
     3.
@@ -25,6 +25,11 @@ function App() {
       })
       .filter((t) => t.text.toLowerCase().includes(q))
   }, [todos, filter, query])//day5//
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])//day5//
+
 
   const itemsLeft = todos.filter((t) => !t.completed).length//day 4//
 
@@ -55,9 +60,13 @@ function App() {
     setTodos((prev) => prev.filter((t) => !t.completed))
   }//day 4//
 
+  function toggleTheme() {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+  }//day5//
+
   return (
     <main className="app-card">
-      <Header />
+      <Header theme={theme} onToggleTheme={toggleTheme} />//day5//
       <TodoForm onAdd={addTodo} />
       <SearchBar query={query} onQueryChange={setQuery} />//day5//
       <FilterTabs filter={filter} onFilterChange={setFilter} />
